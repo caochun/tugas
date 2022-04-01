@@ -1,0 +1,31 @@
+{
+  "name": "tugas",
+  "version": "1.0.0",
+  "description": "tugas",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caochun/tugas.git"
+  },
+  "author": "@Chun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caochun/tugas/issues"
+  },
+  "homepage": "https://github.com/caochun/tugas#readme",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "rest": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.4",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
