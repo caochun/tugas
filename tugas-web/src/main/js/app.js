@@ -26,10 +26,11 @@ class App extends React.Component { // <1>
         )
     }
 }
+
 // end::app[]
 
 // tag::employee-list[]
-class EmployeeList extends React.Component{
+class EmployeeList extends React.Component {
     render() {
         const employees = this.props.employees.map(employee =>
             <Employee key={employee._links.self.href} employee={employee}/>
@@ -48,10 +49,11 @@ class EmployeeList extends React.Component{
         )
     }
 }
+
 // end::employee-list[]
 
 // tag::employee[]
-class Employee extends React.Component{
+class Employee extends React.Component {
     render() {
         return (
             <tr>
@@ -62,11 +64,12 @@ class Employee extends React.Component{
         )
     }
 }
+
 // end::employee[]
 
 // tag::render[]
 const root = ReactDOM.createRoot(document.getElementById('react'));
-root.render(<App />)
+root.render(<App/>)
 // ReactDOM.createRoot(
 //     <App />,
 //     document.getElementById('react')

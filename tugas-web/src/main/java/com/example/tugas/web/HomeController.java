@@ -1,4 +1,4 @@
-package com.example.tugas.controller;
+package com.example.tugas.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

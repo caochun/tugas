@@ -1,13 +1,15 @@
-package com.example.tugas;
+package com.example.tugas.web;
 
-import com.example.tugas.model.Employee;
-import com.example.tugas.repository.EmployeeRepository;
+import com.example.tugas.employee.Employee;
+import com.example.tugas.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "com.example.tugas")
 public class TugasApplication implements CommandLineRunner {
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.example.tugas.model;
+package com.example.tugas.employee;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
