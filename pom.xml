@@ -9,7 +9,7 @@
         <version>2.6.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
+    <groupId>info.nemoworks</groupId>
     <artifactId>tugas</artifactId>
     <version>0.0.1</version>
     <name>tugas</name>
@@ -18,7 +18,8 @@
     <modules>
         <module>tugas-web</module>
         <module>tugas-framework</module>
-        <module>tugas-domain</module>
+        <module>tugas-domain-employee</module>
+        <module>tugas-domain-bid</module>
     </modules>
 
     <properties>

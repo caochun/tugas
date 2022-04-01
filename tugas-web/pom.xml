@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>tugas</artifactId>
-        <groupId>com.example</groupId>
+        <groupId>info.nemoworks</groupId>
         <version>0.0.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -14,8 +14,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>tugas-domain</artifactId>
+            <groupId>info.nemoworks</groupId>
+            <artifactId>tugas-domain-bid</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.nemoworks</groupId>
+            <artifactId>tugas-domain-employee</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
