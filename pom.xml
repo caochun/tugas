@@ -16,10 +16,10 @@
     <description>Demo project</description>
 
     <modules>
-        <module>tugas-web</module>
         <module>tugas-framework</module>
         <module>tugas-domain-employee</module>
         <module>tugas-domain-bid</module>
+        <module>tugas-web-employee</module>
     </modules>
 
     <properties>

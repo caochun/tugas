@@ -11,9 +11,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"com.example.tugas"})
-@EntityScan("com.example.tugas.employee")
-@EnableJpaRepositories("com.example.tugas.employee")
+@ComponentScan({"info.nemoworks.tugas"})
+@EntityScan("info.nemoworks.tugas.employee")
+@EnableJpaRepositories("info.nemoworks.tugas.employee")
 public class TugasApplication implements CommandLineRunner {
 
     public static void main(String[] args) {

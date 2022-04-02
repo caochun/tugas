@@ -15,11 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>info.nemoworks</groupId>
-            <artifactId>tugas-domain-bid</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>info.nemoworks</groupId>
             <artifactId>tugas-domain-employee</artifactId>
             <version>${project.version}</version>
         </dependency>
