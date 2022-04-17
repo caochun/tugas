@@ -6,14 +6,14 @@ import java.util.function.Consumer;
 
 public class MessageListener<T extends Message> implements ApplicationListener<T> {
 
-    private Consumer<T> messageHandle;
+    private Consumer<T> messageConsumer;
 
-    public MessageListener(Consumer<T> handle) {
-        this.messageHandle = handle;
+    public MessageListener(Consumer<T> consumer) {
+        this.messageConsumer = consumer;
     }
 
     @Override
     public void onApplicationEvent(T event) {
-        this.messageHandle.accept(event);
+        this.messageConsumer.accept(event);
     }
 }

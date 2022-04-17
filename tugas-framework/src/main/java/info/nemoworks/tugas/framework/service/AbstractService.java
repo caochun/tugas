@@ -1,6 +1,7 @@
 package info.nemoworks.tugas.framework.service;
 
 import info.nemoworks.tugas.framework.actor.Actor;
+import info.nemoworks.tugas.framework.boundary.Boundary;
 import info.nemoworks.tugas.framework.boundary.Command;
 import info.nemoworks.tugas.framework.boundary.Query;
 import info.nemoworks.tugas.framework.domain.Entity;
@@ -11,9 +12,8 @@ import org.apache.commons.scxml2.model.Transition;
 import org.apache.commons.scxml2.model.TransitionTarget;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class AbstractService<T extends Entity> implements ChartListener {
@@ -24,9 +24,9 @@ public abstract class AbstractService<T extends Entity> implements ChartListener
 
     public AbstractService(URL chartURL) throws ModelException {
         this.chart = new AbstractChart(chartURL);
+        this.registerCommandHandle(this::handleCommand);
     }
 
-    public abstract Query<T> present(String state);
 
     @Override
     public void onEntry(EnterableState enterableState) {
@@ -45,7 +45,15 @@ public abstract class AbstractService<T extends Entity> implements ChartListener
         Logger.getLogger(this.getClass().getName()).info("Transiting from " + transitionTarget.getId() + " to " + transitionTarget1.getId());
     }
 
-    public void registerCommandHandle(Command<T> command, Consumer<Command<T>> handler){
-
+    private void registerCommandHandle(Consumer<Command<T>> commandHandle) {
+        actor.register((Consumer<Message<Command<T>>>) message -> AbstractService.this.handleCommand(message.getPayload()));
     }
+
+    public abstract Query<T> present(String state);
+
+    public abstract void handleCommand(Command<T> command);
+
+    //This should be defined in chart model, but now we just use this external map
+    private Map<String, Boundary<T>> boundaryProtocol;
+
 }

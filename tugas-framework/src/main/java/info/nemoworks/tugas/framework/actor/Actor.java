@@ -1,5 +1,6 @@
 package info.nemoworks.tugas.framework.actor;
 
+import info.nemoworks.tugas.framework.boundary.Command;
 import info.nemoworks.tugas.framework.domain.Entity;
 import info.nemoworks.tugas.framework.domain.QCRService;
 import info.nemoworks.tugas.framework.message.Message;
@@ -18,7 +19,6 @@ public abstract class Actor {
 
     private MessageStub stub;
 
-
     @Autowired
     public void setStub(MessageStub stub) {
         this.stub = stub;
@@ -32,8 +32,8 @@ public abstract class Actor {
         this.stub.pub(message);
     }
 
-    public <M extends Message> void register(Consumer<M> subscriber) {
-        this.stub.register(new MessageListener<>(subscriber));
+    public <M extends Message> void register(Consumer<M> messageConsumer) {
+        this.stub.register(new MessageListener<>(messageConsumer));
     }
 
 }
