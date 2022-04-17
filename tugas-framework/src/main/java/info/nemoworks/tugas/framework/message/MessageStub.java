@@ -27,7 +27,7 @@ public class MessageStub {
         applicationEventPublisher.publishEvent(message);
     }
 
-    public void register(Subscriber subscriber){
+    public void register(MessageListener subscriber){
         applicationContext.addApplicationListener(subscriber);
     }
 

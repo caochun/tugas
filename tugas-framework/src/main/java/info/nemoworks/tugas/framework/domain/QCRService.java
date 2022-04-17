@@ -5,9 +5,11 @@ import info.nemoworks.tugas.framework.boundary.Query;
 
 import java.util.List;
 
-public interface Service<T extends Entity> {
+public interface QCRService<T extends Entity> {
 
-    public List<String> states();
+    public List<Query<T>> queries();
+
+    public List<Command<T>> commands();
 
     public Query<T> present(String state);
 

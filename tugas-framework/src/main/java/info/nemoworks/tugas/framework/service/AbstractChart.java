@@ -1,4 +1,4 @@
-package info.nemoworks.tugas.framework.chart;
+package info.nemoworks.tugas.framework.service;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,21 +20,19 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 
-public abstract class AbstractChart {
+public class AbstractChart {
     private SCXML stateMachine;
     private SCXMLExecutor engine;
     private Log log;
     private static final Class<?>[] SIGNATURE = new Class[0];
     private static final Object[] PARAMETERS = new Object[0];
 
-    private AbstractChartListener chartListener;
 
-
-    public AbstractChart(URL scxmlDocument, AbstractChartListener chartListener) throws ModelException {
-        this((URL) scxmlDocument, new JexlContext(), new JexlEvaluator(), chartListener);
+    public AbstractChart(URL scxmlDocument) throws ModelException {
+        this((URL) scxmlDocument, new JexlContext(), new JexlEvaluator());
     }
 
-    public AbstractChart(URL scxmlDocument, Context rootCtx, Evaluator evaluator, AbstractChartListener chartListener) throws ModelException {
+    private AbstractChart(URL scxmlDocument, Context rootCtx, Evaluator evaluator) throws ModelException {
         this.log = LogFactory.getLog(this.getClass());
 
         try {
@@ -47,22 +45,24 @@ public abstract class AbstractChart {
             this.logError(var7);
         }
 
-        this.initialize(this.stateMachine, rootCtx, evaluator, chartListener);
+        this.initialize(this.stateMachine, rootCtx, evaluator);
     }
 
 
-    private void initialize(SCXML stateMachine, Context rootCtx, Evaluator evaluator, AbstractChartListener chartListener) throws ModelException {
+    private void initialize(SCXML stateMachine, Context rootCtx, Evaluator evaluator) throws ModelException {
         this.engine = new SCXMLExecutor(evaluator, new SimpleDispatcher(), new SimpleErrorReporter());
         this.engine.setStateMachine(stateMachine);
         this.engine.setRootContext(rootCtx);
-        this.engine.addListener(stateMachine, chartListener);
+    }
+
+    public void go(ChartListener chartListener) {
+        this.engine.addListener(this.stateMachine, chartListener);
 
         try {
             this.engine.go();
         } catch (ModelException var5) {
             this.logError(var5);
         }
-
     }
 
     public boolean fireEvent(String event) {
