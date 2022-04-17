@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" initial="created" version="1.0">
+    <state id="created">
+        <transition event="process" target="editing"/>
+    </state>
+    <state id="editing">
+        <transition event="submit" target="reviewing"/>
+        <transition event="save" target="editing"/>
+    </state>
+    <state id="reviewing">
+        <transition event="approve" target="tracking"/>
+        <transition event="disapprove" target="editing"/>
+    </state>
+    <state id="tracking">
+        <transition event="finalize" target="closed"/>
+        <transition event="track" target="tracking"/>
+    </state>
+    <final id="closed"/>
+</scxml>

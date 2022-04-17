@@ -1,6 +1,6 @@
 package info.nemoworks.tugas.bid.domain;
 
-import info.nemoworks.tugas.framework.entity.Entity;
+import info.nemoworks.tugas.framework.domain.Entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

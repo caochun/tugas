@@ -3,7 +3,7 @@ package info.nemoworks.tugas.bid.actor;
 import info.nemoworks.tugas.bid.boundary.command.CreateCommand;
 import info.nemoworks.tugas.bid.boundary.query.CreatingQuery;
 import info.nemoworks.tugas.framework.actor.Actor;
-import info.nemoworks.tugas.framework.messaging.Message;
+import info.nemoworks.tugas.framework.message.Message;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 

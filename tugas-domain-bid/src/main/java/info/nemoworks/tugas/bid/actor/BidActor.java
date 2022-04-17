@@ -4,7 +4,7 @@ import info.nemoworks.tugas.bid.boundary.command.CreateCommand;
 import info.nemoworks.tugas.bid.boundary.query.BidQuery;
 import info.nemoworks.tugas.bid.domain.BidService;
 import info.nemoworks.tugas.framework.actor.Actor;
-import info.nemoworks.tugas.framework.messaging.Message;
+import info.nemoworks.tugas.framework.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

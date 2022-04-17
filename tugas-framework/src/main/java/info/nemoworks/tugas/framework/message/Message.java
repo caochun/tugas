@@ -1,4 +1,4 @@
-package info.nemoworks.tugas.framework.messaging;
+package info.nemoworks.tugas.framework.message;
 
 import lombok.Getter;
 import org.springframework.context.PayloadApplicationEvent;

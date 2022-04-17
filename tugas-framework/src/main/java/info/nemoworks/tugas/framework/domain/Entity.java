@@ -1,4 +1,4 @@
-package info.nemoworks.tugas.framework.entity;
+package info.nemoworks.tugas.framework.domain;
 
 import lombok.Getter;
 

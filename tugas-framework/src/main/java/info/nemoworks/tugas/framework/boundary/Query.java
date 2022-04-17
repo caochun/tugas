@@ -1,6 +1,6 @@
 package info.nemoworks.tugas.framework.boundary;
 
-import info.nemoworks.tugas.framework.entity.Entity;
+import info.nemoworks.tugas.framework.domain.Entity;
 import lombok.Getter;
 import lombok.NonNull;
 

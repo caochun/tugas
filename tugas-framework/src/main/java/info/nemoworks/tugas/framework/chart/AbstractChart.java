@@ -1,42 +1,40 @@
 package info.nemoworks.tugas.framework.chart;
 
-import info.nemoworks.tugas.framework.entity.Entity;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.scxml2.*;
+import org.apache.commons.scxml2.Context;
+import org.apache.commons.scxml2.Evaluator;
+import org.apache.commons.scxml2.SCXMLExecutor;
+import org.apache.commons.scxml2.TriggerEvent;
 import org.apache.commons.scxml2.env.SimpleDispatcher;
 import org.apache.commons.scxml2.env.SimpleErrorReporter;
 import org.apache.commons.scxml2.env.jexl.JexlContext;
 import org.apache.commons.scxml2.env.jexl.JexlEvaluator;
 import org.apache.commons.scxml2.io.SCXMLReader;
-import org.apache.commons.scxml2.model.*;
+import org.apache.commons.scxml2.model.ModelException;
+import org.apache.commons.scxml2.model.SCXML;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.function.BiConsumer;
 
-public abstract class AbstractChart<T extends Entity> {
+public abstract class AbstractChart {
     private SCXML stateMachine;
     private SCXMLExecutor engine;
     private Log log;
     private static final Class<?>[] SIGNATURE = new Class[0];
     private static final Object[] PARAMETERS = new Object[0];
 
-    private T entity;
+    private AbstractChartListener chartListener;
 
-    public T getEntity(){
-        return entity;
+
+    public AbstractChart(URL scxmlDocument, AbstractChartListener chartListener) throws ModelException {
+        this((URL) scxmlDocument, new JexlContext(), new JexlEvaluator(), chartListener);
     }
 
-
-    public AbstractChart(URL scxmlDocument, BiConsumer<EnterableState, T> stateConsumer, T entity) throws ModelException {
-        this((URL) scxmlDocument, new JexlContext(), new JexlEvaluator(), stateConsumer, entity);
-    }
-
-    public AbstractChart(URL scxmlDocument, Context rootCtx, Evaluator evaluator, BiConsumer<EnterableState,T> stateConsumer, T entity) throws ModelException {
+    public AbstractChart(URL scxmlDocument, Context rootCtx, Evaluator evaluator, AbstractChartListener chartListener) throws ModelException {
         this.log = LogFactory.getLog(this.getClass());
 
         try {
@@ -49,16 +47,15 @@ public abstract class AbstractChart<T extends Entity> {
             this.logError(var7);
         }
 
-        this.initialize(this.stateMachine, rootCtx, evaluator, stateConsumer, entity);
+        this.initialize(this.stateMachine, rootCtx, evaluator, chartListener);
     }
 
 
-    private void initialize(SCXML stateMachine, Context rootCtx, Evaluator evaluator, BiConsumer<EnterableState, T> stateConsumer, T entity) throws ModelException {
+    private void initialize(SCXML stateMachine, Context rootCtx, Evaluator evaluator, AbstractChartListener chartListener) throws ModelException {
         this.engine = new SCXMLExecutor(evaluator, new SimpleDispatcher(), new SimpleErrorReporter());
         this.engine.setStateMachine(stateMachine);
         this.engine.setRootContext(rootCtx);
-        this.engine.addListener(stateMachine, new AbstractChart.EntryListener(stateConsumer));
-        this.entity = entity;
+        this.engine.addListener(stateMachine, chartListener);
 
         try {
             this.engine.go();
@@ -69,6 +66,7 @@ public abstract class AbstractChart<T extends Entity> {
     }
 
     public boolean fireEvent(String event) {
+
         TriggerEvent[] evts = new TriggerEvent[]{new TriggerEvent(event, 3)};
 
         try {
@@ -134,21 +132,4 @@ public abstract class AbstractChart<T extends Entity> {
 
     }
 
-    protected class EntryListener implements SCXMLListener {
-        BiConsumer<EnterableState, Entity> stateConsumer;
-
-        protected EntryListener(BiConsumer<EnterableState, Entity> stateConsumer) {
-            this.stateConsumer = stateConsumer;
-        }
-
-        public void onEntry(EnterableState entered) {
-            stateConsumer.accept(entered, entity);
-        }
-
-        public void onTransition(TransitionTarget from, TransitionTarget to, Transition transition, String event) {
-        }
-
-        public void onExit(EnterableState exited) {
-        }
-    }
 }
