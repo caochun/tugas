@@ -1,6 +1,6 @@
 package info.nemoworks.tugas.bid.domain;
 
-import info.nemoworks.tugas.framework.service.AbstractChart;
+import info.nemoworks.tugas.framework.chart.AbstractChart;
 import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.ModelException;
 

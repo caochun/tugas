@@ -1,10 +1,10 @@
 package info.nemoworks.tugas.framework.boundary;
 
-import info.nemoworks.tugas.framework.domain.Entity;
+import info.nemoworks.tugas.framework.domain.Aggregate;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class Query<T extends Entity> {
+public class Query<T extends Aggregate> {
 
     @Getter
     private T source;

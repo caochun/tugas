@@ -1,6 +1,6 @@
 package info.nemoworks.tugas.bid.domain;
 
-import info.nemoworks.tugas.framework.domain.Entity;
+import info.nemoworks.tugas.framework.domain.Aggregate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class Bid extends Entity {
+public class Bid extends Aggregate {
 
     private String creator;
 

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageStub {
 
-
     private ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
@@ -23,11 +22,11 @@ public class MessageStub {
         this.applicationContext = applicationContext;
     }
 
-    public void pub(Message<?> message){
+    public void pub(Message<?> message) {
         applicationEventPublisher.publishEvent(message);
     }
 
-    public void register(MessageListener subscriber){
+    public void register(MessageListener subscriber) {
         applicationContext.addApplicationListener(subscriber);
     }
 

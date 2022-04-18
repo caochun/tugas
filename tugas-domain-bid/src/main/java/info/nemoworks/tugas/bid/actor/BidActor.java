@@ -3,7 +3,6 @@ package info.nemoworks.tugas.bid.actor;
 import info.nemoworks.tugas.bid.boundary.command.CreateCommand;
 import info.nemoworks.tugas.bid.boundary.query.BidQuery;
 import info.nemoworks.tugas.bid.domain.BidService;
-import info.nemoworks.tugas.framework.actor.Actor;
 import info.nemoworks.tugas.framework.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Component
-public class BidActor extends Actor {
+public class BidActor {
 
     private BidService bidService;
 
@@ -22,7 +21,7 @@ public class BidActor extends Actor {
 
     @PostConstruct
     public void registerCommandSubscribers() {
-        super.<Message<CreateCommand>>register(this::handleCreateCommandMessage);
+//        super.<Message<CreateCommand>>register(this::handleCreateCommandMessage);
     }
 
     private void handleCreateCommandMessage(Message<CreateCommand> message) {
@@ -32,7 +31,7 @@ public class BidActor extends Actor {
     public void pubQueryMessage(BidQuery bidQuery) {
         if (null == bidQuery) return;
         else {
-            pub(new Message<>(this, bidQuery));
+//            pub(new Message<>(this, bidQuery));
         }
     }
 }
