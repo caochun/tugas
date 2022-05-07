@@ -1,7 +1,6 @@
 package info.nemoworks.tugas.bid.actor;
 
 import info.nemoworks.tugas.bid.boundary.query.EditingQuery;
-import info.nemoworks.tugas.framework.actor.Actor;
 import info.nemoworks.tugas.framework.message.Message;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class BidEditActor extends Actor {
+public class BidEditActor {
 
     private Map<String, EditingQuery> queries = new HashMap<>();
 

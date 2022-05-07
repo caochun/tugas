@@ -1,4 +1,4 @@
-package info.nemoworks.tugas.framework.service;
+package info.nemoworks.tugas.framework.chart;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,16 +16,12 @@ import org.apache.commons.scxml2.model.SCXML;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URL;
 
-public class AbstractChart {
+public abstract class AbstractChart {
     private SCXML stateMachine;
     private SCXMLExecutor engine;
     private Log log;
-    private static final Class<?>[] SIGNATURE = new Class[0];
-    private static final Object[] PARAMETERS = new Object[0];
 
 
     public AbstractChart(URL scxmlDocument) throws ModelException {
@@ -53,11 +49,6 @@ public class AbstractChart {
         this.engine = new SCXMLExecutor(evaluator, new SimpleDispatcher(), new SimpleErrorReporter());
         this.engine.setStateMachine(stateMachine);
         this.engine.setRootContext(rootCtx);
-    }
-
-    public void go(ChartListener chartListener) {
-        this.engine.addListener(this.stateMachine, chartListener);
-
         try {
             this.engine.go();
         } catch (ModelException var5) {
@@ -67,10 +58,10 @@ public class AbstractChart {
 
     public boolean fireEvent(String event) {
 
-        TriggerEvent[] evts = new TriggerEvent[]{new TriggerEvent(event, 3)};
+        TriggerEvent[] events = new TriggerEvent[]{new TriggerEvent(event, 3)};
 
         try {
-            this.engine.triggerEvents(evts);
+            this.engine.triggerEvents(events);
         } catch (ModelException var4) {
             this.logError(var4);
         }
@@ -90,30 +81,6 @@ public class AbstractChart {
         this.log = log;
     }
 
-    public boolean invoke(String methodName) {
-        Class clas = this.getClass();
-
-        try {
-            Method method = clas.getDeclaredMethod(methodName, SIGNATURE);
-            method.invoke(this, PARAMETERS);
-            return true;
-        } catch (SecurityException var4) {
-            this.logError(var4);
-            return false;
-        } catch (NoSuchMethodException var5) {
-            this.logError(var5);
-            return false;
-        } catch (IllegalArgumentException var6) {
-            this.logError(var6);
-            return false;
-        } catch (IllegalAccessException var7) {
-            this.logError(var7);
-            return false;
-        } catch (InvocationTargetException var8) {
-            this.logError(var8);
-            return false;
-        }
-    }
 
     public boolean resetMachine() {
         try {
@@ -131,5 +98,8 @@ public class AbstractChart {
         }
 
     }
+
+    public abstract boolean invoke(String state);
+
 
 }

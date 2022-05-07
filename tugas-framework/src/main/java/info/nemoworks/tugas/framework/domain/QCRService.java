@@ -5,7 +5,7 @@ import info.nemoworks.tugas.framework.boundary.Query;
 
 import java.util.List;
 
-public interface QCRService<T extends Entity> {
+public interface QCRService<T extends Aggregate> {
 
     public List<Query<T>> queries();
 
